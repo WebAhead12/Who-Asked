@@ -14,6 +14,8 @@
 	- connection.js
 	- init.sql
 	- build.js
+	- user.js
+	- questions.js
 - public
 	- index.html
 	- style.css
@@ -21,9 +23,7 @@
 	- login.html
 	- login.css
 	- login.js
-- data
-	- user.js
-	- questions.js
+	
 - handlers
 	- auth.js
 	- questions.js
