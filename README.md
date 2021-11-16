@@ -51,7 +51,7 @@
 - Login into an account.
 - Choose account icon.
 - Answer anonymous questions.
-- Search and view other users profiles.
+- Search and view other users profile.
 - Ask other users questions anonymously.
 
 # Wireframes
