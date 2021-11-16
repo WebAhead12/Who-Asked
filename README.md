@@ -23,12 +23,14 @@
 	- user.js
 	- questions.js
 - public
-	- index.html
-	- style.css
-	- script.js
-	- login.html
-	- login.css
-	- login.js
+	- Profile
+		- profile.html
+		- profile.css
+		- profile.js
+	- Login
+		- login.html
+		- login.css
+		- login.js
 - handlers
 	- auth.js
 	- questions.js
@@ -44,5 +46,4 @@
 - Search and view other users' questions 
 
 # Wireframes
-## Home Page
-<img src="https://github.com/WebAhead12/Who-Asked/blob/main/Assets/Diagrams/Register.svg"> </img>
+![image](https://user-images.githubusercontent.com/26445697/141988967-72f2e54f-b5c5-4809-a5f0-aec46f97d336.png)
