@@ -5,9 +5,15 @@
 
 # Folder routes:
 - /
-- /profile/user
-- /view/user
-- /logout
+- Post /register {username:"", password:""} Return={response:""}
+- Post /login {username:"", password: ""} Return={response: ""}
+- Get /logout
+
+- Get /data/:user {page: ""} Return={data:[{question:"", answer:""}]}
+- Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""} Return={response:""}
+
+- Get /profile/:user
+- Get /view/:user
 
 # Folder Structure
 - database
