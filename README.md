@@ -5,17 +5,18 @@
 
 # Server routes:
 - /
-- Post /register {username:"", password:""} Return={response:"UsernameTaken"}
-- Post /login {username:"", password: ""} Return={response: "NotFound/WrongPassword/Found"} (If Found redirect to /profile/:user)
+- Post /register {username:"", password:""} Return={response:"UsernameTaken/Success"}
+- Post /login {username:"", password: ""} Return={response: "NotFound/WrongPassword/Successful"} (If found redirect to /profile/:user)
 - Get /logout Redirect to /
 
 - Get /data/:user {page: ""} Return={data:[{question:"", answer:""}]}
-- Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""} Return={response:""}
+- Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""} Return={response:"Unsuccessful/Successful"}
 
 - Get /profile/:user
 - Get /image/:user Return={id:""}
-- Post /image/:user {id:""} Return={response:""}
-- Get /view/:user Return={response:"NotFound/Found/Same"}
+- Post /image/:user {id:""} Return={response:"Successful/Unsuccessful"}
+- Get /view/:user Return={response:"NotFound/Successful/Same"}
+- Default routes back to /
 
 # Folder Structure
 - database
