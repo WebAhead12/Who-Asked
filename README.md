@@ -9,18 +9,18 @@
 	- init.sql
 	- build.js
 - public
-	  index.html
-	  style.css
-	  script.js
-	  login.html
-	  login.css
-	  login.js
+	- index.html
+	- style.css
+	- script.js
+	- login.html
+	- login.css
+	- login.js
 - data
-	  user.js
-	  questions.js
+	- user.js
+	- questions.js
 - handlers
-	  auth.js
-	  questions.js
+	- auth.js
+	- questions.js
 server.js
 router.js
 handler.js
