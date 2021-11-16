@@ -27,11 +27,11 @@
 - handlers
 	- auth.js
 	- questions.js
-server.js
-router.js
-handler.js
-.env
-package.json
+- server.js
+- router.js
+- handler.js
+- .env
+- package.json
 
 # Features
 - Ask questions anonymously
