@@ -5,9 +5,9 @@
 
 # Folder Structure
 - database
-	  connection.js
-	  init.sql
-	  build.js
+	- connection.js
+	- init.sql
+	- build.js
 - public
 	  index.html
 	  style.css
