@@ -3,7 +3,7 @@
 # Database Schema
 <img src = "https://github.com/WebAhead12/Who-Asked/blob/main/Assets/Diagrams/Database.svg"> </img>
 
-# Folder routes:
+# Server routes:
 - /
 - Post /register {username:"", password:""} Return={response:""}
 - Post /login {username:"", password: ""} Return={response: ""}
@@ -13,6 +13,8 @@
 - Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""} Return={response:""}
 
 - Get /profile/:user
+- Get /image/:user Return={id:""}
+- Post /image/:user {id:""} Return={response:""}
 - Get /view/:user
 
 # Folder Structure
