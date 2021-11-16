@@ -25,6 +25,9 @@
 	- build.js
 	- user.js
 	- questions.js
+- assets
+	- icons
+	- diagrams
 - public
 	- Profile
 		- profile.html
@@ -49,4 +52,4 @@
 - Search and view other users' questions 
 
 # Wireframes
-![image](https://user-images.githubusercontent.com/26445697/141988967-72f2e54f-b5c5-4809-a5f0-aec46f97d336.png)
+![image](https://user-images.githubusercontent.com/26445697/141996117-1346782b-81c5-428d-af6c-5410a111e3cb.png)
