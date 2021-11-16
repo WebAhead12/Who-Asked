@@ -3,6 +3,12 @@
 # Database Schema
 <img src = "https://github.com/WebAhead12/Who-Asked/blob/main/Database.svg"> </img>
 
+# Folder routes:
+- /
+- /profile/user
+- /view/user
+- /logout
+
 # Folder Structure
 - database
 	- connection.js
