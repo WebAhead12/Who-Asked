@@ -25,6 +25,9 @@
 	- build.js
 	- user.js
 	- questions.js
+- assets
+	- icons
+	- diagrams
 - public
 	- Profile
 		- profile.html
