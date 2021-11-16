@@ -47,9 +47,12 @@
 - package.json
 
 # Features
-- Ask questions anonymously
-- Answer anonymous questions
-- Search and view other users' questions 
+- Register an account.
+- Login into an account.
+- Choose account icon.
+- Answer anonymous questions.
+- Search and view other users profiles.
+- Ask other users questions anonymously.
 
 # Wireframes
 ![image](https://user-images.githubusercontent.com/26445697/141996117-1346782b-81c5-428d-af6c-5410a111e3cb.png)
