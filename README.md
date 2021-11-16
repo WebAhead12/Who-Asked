@@ -15,7 +15,7 @@
 - Get /profile/:user
 - Get /image/:user Return={id:""}
 - Post /image/:user {id:""} Return={response:""}
-- Get /view/:user
+- Get /view/:user Return={response:"NotFound/Found/Same"}
 
 # Folder Structure
 - database
