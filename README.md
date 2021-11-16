@@ -5,9 +5,9 @@
 
 # Server routes:
 - /
-- Post /register {username:"", password:""} Return={response:""}
-- Post /login {username:"", password: ""} Return={response: ""}
-- Get /logout
+- Post /register {username:"", password:""} Return={response:"UsernameTaken"}
+- Post /login {username:"", password: ""} Return={response: "NotFound/WrongPassword/Found"} (If Found redirect to /profile/:user)
+- Get /logout Redirect to /
 
 - Get /data/:user {page: ""} Return={data:[{question:"", answer:""}]}
 - Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""} Return={response:""}
