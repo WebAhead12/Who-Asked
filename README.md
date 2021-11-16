@@ -1,7 +1,7 @@
 # Who-Asked
 
 # Database Schema
-<img src = "https://github.com/WebAhead12/Who-Asked/blob/main/Database.svg"> </img>
+<img src = "https://github.com/WebAhead12/Who-Asked/blob/main/Assets/Diagrams/Database.svg"> </img>
 
 # Folder routes:
 - /
