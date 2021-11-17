@@ -1,21 +1,46 @@
-const db = require("./databse/connection")
+// const db = require('./databse/connection');
+const auth = require('./dataHandlers/auth');
+const users = require('./database/users');
 
 
 //home handler returns index.html file
 function home(req, res) {
-
+  if (req.user) {
+    res.redirect(`/profile/${req.user}`);
+    return;
+  }
+  res.sendFile('./public/login/login.html');
 }
 
-
-//post request, register takes username + password, adds user to db, redirect to profile
+//Register takes username + password, adds user to db, send status message to FrontEnd
+//async & await is missing.
 function register(req, res) {
-
+  const account = req.body;
+  if (auth.checkCredential(account.username, account.password).response == 'NotFound') {//make user only if it didn't exist before.
+    // insert user to database
+    users.setUser(account.username, account.password);
+    return { response: 'Success' };
+  }
+  return { response: 'UsernameTaken' };
 }
 
 
-//username + password match, redirects to profile
+//log in process
+//async & await is missing.
 function login(req, res) {
-
+  const account = req.body;
+  if (auth.checkCredential(account.username, account.password).response == 'Successful') {
+    //make a cookie for the logged user.
+    const token = auth.encodeAccount(account);
+    res.cookie("account", token, { maxAge: 600000 });
+    res.redirect(`/profile/${account.username}`);
+    return { response: 'Successful' };
+  }
+  else if (auth.checkCredential(account.username, account.password).response == 'NotFound') {
+    return { response: 'NotFound' };
+  } else {
+    return { response: 'WrongPassword' };
+  }
 }
 
 
@@ -53,7 +78,7 @@ function getUser(req, res) {
 
 
 //gets user icon that they chose on registration?
-function getImageid(req, res) {
+function getImageId(req, res) {
 
 }
 
@@ -63,9 +88,4 @@ function setImageId(req, res) {
 
 }
 
-
-//not sure what to do here since the logout function in our last project was in the script.js
-function logout(req, res) {
-
-}
-
+module.exports = { home, register, login, getUserQuestions, setQuestionOrAnswer, getProfile, getUser, getImageId, setImageId };

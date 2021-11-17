@@ -1,7 +1,7 @@
 //is Router supposed to be capitalized?
 const router = express.Router();
 const express = require('express');
-const handlers = require('./handlers');
+const handlers = require('./handler');
 
 
 router.get('/', handlers.home);
@@ -13,7 +13,6 @@ router.get('/profile/:user', handlers.getProfile);//when log in
 router.get('/view/:user', handlers.getUser); //when search
 router.get('/image/:user', handlers.getImageId);
 router.post('/image/:user', handlers.setImageId);
-router.get('/logout', handlers.logout);
 router.use((req, res) => {//strange route => redirect to homepage
     res.redirect('/');
 })

@@ -23,7 +23,7 @@
 	- connection.js
 	- init.sql
 	- build.js
-	- user.js
+	- users.js
 	- questions.js
 - assets
 	- icons
@@ -37,7 +37,7 @@
 		- login.html
 		- login.css
 		- login.js
-- handlers
+- dataHandlers
 	- auth.js
 	- questions.js
 - server.js
