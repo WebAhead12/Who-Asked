@@ -9,7 +9,7 @@
 - Post /login {username:"", password: ""} Return={response: "NotFound/WrongPassword/Successful"} (If found redirect to /profile/:user)
 - Get /logout Redirect to /
 
-- Get /data/:user/:page {page: ""} Return={ data: [{id: "", question:"", answer:"", user_id: '', date: ''},...] }
+- Get /data/:user/:page Return={ data: [{id: "", question:"", answer:"", user_id: '', date: ''},...] }
 - Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""} Return={response:"Unsuccessful/Successful"}
 
 - Get /profile/:user
