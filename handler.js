@@ -21,11 +21,10 @@ function register(req, res) {
   const account = req.body;
   auth.checkCredential(account.username, account.password)
     .then(result => {
-      console.log(result);
       if (result.response == 'NotFound') {
         users.setUser(account.username, account.password)
-          .then(res.send({ response: 'Successful' }))
-          .catch(res.send({ response: 'Insertion error, unable to set username.' }))
+          .then(() => res.send({ response: 'Successful' }))
+          .catch(err => res.send({ response: 'Insertion error, unable to set username.' }))
       } else {
         res.send({ response: 'UsernameTaken' })
       }
@@ -52,29 +51,36 @@ function getUserQuestions(req, res) {
   const user = req.params.user;
   const page = req.params.page;
   questionHandler.viewQuestions(page, user)
-    .then(res.send)
-    .catch(res.send);
+    .then((questions) => res.send(questions.data))
+    .catch(err => res.send({ response: 'Unable to get the user`s questions' }));
 }
 
-
-//Post /data/:user {isAnswer: true/false,  question: "", questionId:"", answer: ""}
-// Return={response:"Unsuccessful/Successful"}
-
 //adds question, user id, time(hopefully), questionId and (is) answer if available
-//must fix conditions on who can post an answer or ask a question!
 function setQuestionOrAnswer(req, res) {
   const postInfo = req.body;
   const user = req.params.user;
   const isLogged = req.user;
-  if (req.user == user) {
+
+  //a user cant ask himself.
+  if (isLogged == user && !postInfo.isAnswer) {
+    return res.send({ response: 'NoAllowed' });
+  }
+
+  //only logged in users can answer his own questions
+  else if (isLogged == user && postInfo.isAnswer) {
     question.setAnswer(postInfo.questionId, postInfo.answer)
       .then(res.send({ response: 'Successful' }))
       .catch(err => {
         res.send({ response: 'Unsuccessful' })
       });
   }
-  // else if ()
-  if (!postInfo.isAnswer) {//same user can't ask him self a question
+
+  //logged out user can't answer
+  else if (!isLogged && postInfo.isAnswer) {
+    return res.send({ response: 'NoAllowed' });
+  }
+
+  else {
     let date = new Date().toLocaleString();
     question.setQuestion(req.params.user, postInfo.question, date)
       .then(res.send({ response: 'Successful' }))
@@ -82,7 +88,6 @@ function setQuestionOrAnswer(req, res) {
         res.send({ response: 'Unsuccessful' })
       });
   }
-
 }
 
 
