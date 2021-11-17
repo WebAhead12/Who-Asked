@@ -5,12 +5,12 @@
 
 # Server routes:
 - /
-- Post /register {username:"", password:""} Return={response:"UsernameTaken/Success"}
+- Post /register {username:"", password:""} Return={response:"UsernameTaken/Successful"}
 - Post /login {username:"", password: ""} Return={response: "NotFound/WrongPassword/Successful"} (If found redirect to /profile/:user)
 - Get /logout Redirect to /
 
 - Get /data/:user/:page Return={ data: [{id: "", question:"", answer:"", user_id: '', date: ''},...] }
-- Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""} Return={response:"Unsuccessful/Successful"}
+- Post /data/:user {isAnswer: true/false, question: "", questionId:"", answer: ""} Return={response:"Unsuccessful/Successful"}
 
 - Get /profile/:user
 - Get /image/:user Return={id:""}
