@@ -13,15 +13,4 @@ router.get('/view/:user', handlers.getUser); //when search
 router.get('/image/:user', handlers.getImageId);
 router.post('/image/:user', handlers.setImageId);
 
-router.use(express.static('assets'));
-
-router.use(express.static('public'));
-
-router.use((req, res) => {//strange route => redirect to homepage
-    res.redirect('/');
-})
-
-
-
-
 module.exports = router;
