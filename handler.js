@@ -21,11 +21,14 @@ function register(req, res) {
   const account = req.body;
   auth.checkCredential(account.username, account.password)
     .then(result => {
-      if (result.response == 'NotFound')
+      console.log(result);
+      if (result.response == 'NotFound') {
         users.setUser(account.username, account.password)
           .then(res.send({ response: 'Successful' }))
           .catch(res.send({ response: 'Insertion error, unable to set username.' }))
-      res.send({ response: 'UsernameTaken' })
+      } else {
+        res.send({ response: 'UsernameTaken' })
+      }
     })
     .catch(res.send);
 }
