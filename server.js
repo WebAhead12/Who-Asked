@@ -18,18 +18,26 @@ app.use((req, res, next) => {
     if (token) {
         const user = auth.decodeAccount(token);
         if (user)
-            req.user = user;
+            req.user = user.username;
     }
     next();
 })
-
-app.use(router);
 
 //logs out user by deleting cookie
 app.get("/logout", (req, res) => {
     res.clearCookie("account");
     res.redirect('/');
 });
+
+app.use(router);
+
+app.use(express.static('assets'));
+
+app.use(express.static('public'));
+
+app.use((req, res) => {//strange route => redirect to homepage
+    res.redirect('/');
+})
 
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);

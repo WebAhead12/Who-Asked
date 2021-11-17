@@ -10,7 +10,7 @@ const { response } = require('express');
 //home handler returns index.html file
 function home(req, res) {
   if (req.user) {
-    res.redirect(`/profile/${req.user.username}`);
+    res.redirect(`/profile/${req.user}`);
     return;
   }
   res.sendFile(path.join(__dirname, "public/login", "login.html"));
@@ -42,7 +42,7 @@ function login(req, res) {
       res.cookie("account", token, { maxAge: 600000 });
     }
     res.send(response);
-  }).catch(res.send);
+  }).catch(err => res.send({ response: 'Error occured while checking cradentials' }));
 }
 
 

@@ -14,7 +14,6 @@ function checkCredential(user, password) {
     else
       return { response: 'Successful' };
   }).catch((err) => {
-    console.log(err);
     return { response: 'Query error in users table' };
   });
 }
