@@ -46,6 +46,7 @@ function displayError(error) {
 
 //Routes the errors into predetermined error messages to be displayed, otherwise show normal.
 function errorRouter(error) {
+  console.log(error);
   switch (error.toLowerCase()) {
     case "usernametaken":
       error = accountErrors.USERNAME_TAKEN_ERROR;

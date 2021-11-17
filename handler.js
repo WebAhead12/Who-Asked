@@ -10,10 +10,9 @@ const { response } = require('express');
 //home handler returns index.html file
 function home(req, res) {
   if (req.user) {
-    res.redirect(`/profile/${req.user}`);
+    res.redirect(`/profile/${req.user.username}`);
     return;
   }
-
   res.sendFile(path.join(__dirname, "public/login", "login.html"));
 }
 
@@ -88,6 +87,7 @@ function setQuestionOrAnswer(req, res) {
 function getProfile(req, res) {
   if (req.user) {
     res.sendFile(path.join(__dirname, 'public/profile', 'profile.html'));
+    return;
   }
   res.redirect('/');
 }

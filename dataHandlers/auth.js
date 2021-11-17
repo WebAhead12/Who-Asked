@@ -9,11 +9,12 @@ function checkCredential(user, password) {
   return users.getUser(user).then(result => {
     if (!result)
       return { response: 'NotFound' };
-    else if (res[0].password != password)
+    else if (result[0].password != password)
       return { response: 'WrongPassword' };
     else
       return { response: 'Successful' };
   }).catch((err) => {
+    console.log(err);
     return { response: 'Query error in users table' };
   });
 }
