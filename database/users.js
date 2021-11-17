@@ -17,4 +17,8 @@ function getUserId(user) {
     return getUser(user).then(result => result[0].id)
 }
 
-module.exports = { getUser, setUser, getUserId };
+function setImageId(user, id) {
+    return db.query(`UPDATE users SET imageId = ${id} WHERE username = ${user}`)
+}
+
+module.exports = { getUser, setUser, getUserId, setImageId };

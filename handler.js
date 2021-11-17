@@ -1,7 +1,9 @@
 // const db = require('./databse/connection');
 const auth = require('./dataHandlers/auth');
 const users = require('./database/users');
-const question = require('./dataHandlers/questions');
+const questionHandler = require('./dataHandlers/questions');
+const question = require('./database/questions');
+const path = require('path');
 const { response } = require('express');
 
 
@@ -11,7 +13,8 @@ function home(req, res) {
     res.redirect(`/profile/${req.user}`);
     return;
   }
-  res.sendFile('./public/login/login.html');
+
+  res.sendFile(path.join(__dirname, "public/login", "login.html"));
 }
 
 //Register takes username + password, adds user to db, send status message to FrontEnd
@@ -21,7 +24,7 @@ function register(req, res) {
     .then(result => {
       if (result.response == 'NotFound')
         users.setUser(account.username, account.password)
-          .then(res.send({ response: 'Success' }))
+          .then(res.send({ response: 'Successful' }))
           .catch(res.send({ response: 'Insertion error, unable to set username.' }))
       res.send({ response: 'UsernameTaken' })
     })
@@ -46,48 +49,80 @@ function login(req, res) {
 function getUserQuestions(req, res) {
   const user = req.params.user;
   const page = req.params.page;
-  question.viewQuestions(page, user)
+  questionHandler.viewQuestions(page, user)
     .then(res.send)
     .catch(res.send);
 }
 
 
+//Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""}
+// Return={response:"Unsuccessful/Successful"}
+
 //adds question, user id, time(hopefully), questionId and (is) answer if available
+//must fix conditions on who can post an answer or ask a question!
 function setQuestionOrAnswer(req, res) {
-
-  // check if question already exists
-  // SELECT * FROM questions WHERE question = userQuestion
-
-  // if not add the question
-  //  INSERT OF RETURNING id
-
-  // if isAnswer is set to true then update the question's answer
-  // UPDATE question WHERE id = questionId SET answer = userAnswer
-
+  const postInfo = req.body;
+  if (!postInfo.isAnswer && req.user != req.params.user) {//same user can't ask him self a question
+    let date = new Date().toLocaleString();
+    question.setQuestion(req.params.user, postInfo.question, date)
+      .then(res.send({ response: 'Successful' }))
+      .catch(err => {
+        res.send({ response: 'Unsuccessful' })
+      });
+  }
+  question.setAnswer(postInfo.questionId, postInfo.answer)
+    .then(res.send({ response: 'Successful' }))
+    .catch(err => {
+      res.send({ response: 'Unsuccessful' })
+    });
 }
 
 
 //retrieves current user's profile from db
 function getProfile(req, res) {
-
+  if (req.user) {
+    res.sendFile(path.join(__dirname, 'public/profile', 'profile.html'));
+  }
+  res.redirect('/');
 }
-
-
 //retrieves user that was searched for in search bar
 function getUser(req, res) {
-
+  const user = req.params.user;
+  if (req.user) {
+    users.getUser(user).then(result => {
+      if (!result)
+        res.send({ response: 'NotFound' });
+      else if (result.username == user)
+        res.send({ response: 'Same' });
+      else
+        res.send({ response: 'Successful' });
+    }).catch((err) => {
+      return { response: 'Query error in users table' };
+    });
+  }
+  res.redirect('/');
 }
-
-
 //gets user icon that they chose on registration?
 function getImageId(req, res) {
-
+  users.getUser(user).then(result => {
+    res.send({ id: result.imageId })
+  }).catch((err) => {
+    return { response: `Query error in users table couldn't get the imageID` };
+  });
 }
 
-
+//Post /image/:user {id:""} Return={response:"Successful/Unsuccessful"}
 //adds user icon if they're a registered user
 function setImageId(req, res) {
-
+  const user = req.params.user;
+  const id = req.body.id;
+  if (req.user == user) {//only the account owner can change his icon!
+    users.setImageId(user, id)
+      .then(res.send({ response: 'Successful' }))
+      .catch(err => {
+        res.send({ response: 'Unsuccessful' });
+      })
+  }
 }
 
 module.exports = { home, register, login, getUserQuestions, setQuestionOrAnswer, getProfile, getUser, getImageId, setImageId };

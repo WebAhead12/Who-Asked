@@ -1,6 +1,5 @@
-//is Router supposed to be capitalized?
-const router = express.Router();
 const express = require('express');
+const router = express.Router();
 const handlers = require('./handler');
 
 

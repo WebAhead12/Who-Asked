@@ -17,4 +17,24 @@ function getQuestions(user) {
 }
 
 
-module.exports = { getQuestions };
+function setQuestion(user, question, date) {
+    return users.getUserId(user).then(id => {
+        const values = [question, id, date];
+        return db.query(`INSERT INTO posts(question, user_id, date) VALUES($1, $2, $3)`, values)
+            .catch(err => {
+                return { response: 'Insertion error, unable to set question.' };
+            });
+    }).catch(err => {
+        return { response: `Couldn't get ${user} user ID` };
+    });
+}
+
+function setAnswer(questionId, answer) {
+    return db.query(`UPDATE posts SET answer = ${answer} WHERE id = ${questionId}`)
+        .catch(err => {
+            return { response: 'Insertion error, unable to set answer.' };
+        });
+}
+
+
+module.exports = { getQuestions, setQuestion, setAnswer };

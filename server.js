@@ -2,7 +2,7 @@ const express = require('express');
 const router = require('./router');
 const cookieParser = require('cookie-parser')
 const auth = require('./dataHandlers/auth');
-// const questionHandler = require("./dataHandlers/questions")
+
 
 const PORT = process.env.PORT || 3000;
 
