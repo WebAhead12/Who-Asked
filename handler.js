@@ -55,14 +55,24 @@ function getUserQuestions(req, res) {
 }
 
 
-//Post /data/:user {isAnswer: true/false, username: "", question: "", questionId:"", answer: ""}
+//Post /data/:user {isAnswer: true/false,  question: "", questionId:"", answer: ""}
 // Return={response:"Unsuccessful/Successful"}
 
 //adds question, user id, time(hopefully), questionId and (is) answer if available
 //must fix conditions on who can post an answer or ask a question!
 function setQuestionOrAnswer(req, res) {
   const postInfo = req.body;
-  if (!postInfo.isAnswer && req.user != req.params.user) {//same user can't ask him self a question
+  const user = req.params.user;
+  const isLogged = req.user;
+  if (req.user == user) {
+    question.setAnswer(postInfo.questionId, postInfo.answer)
+      .then(res.send({ response: 'Successful' }))
+      .catch(err => {
+        res.send({ response: 'Unsuccessful' })
+      });
+  }
+  // else if ()
+  if (!postInfo.isAnswer) {//same user can't ask him self a question
     let date = new Date().toLocaleString();
     question.setQuestion(req.params.user, postInfo.question, date)
       .then(res.send({ response: 'Successful' }))
@@ -70,11 +80,7 @@ function setQuestionOrAnswer(req, res) {
         res.send({ response: 'Unsuccessful' })
       });
   }
-  question.setAnswer(postInfo.questionId, postInfo.answer)
-    .then(res.send({ response: 'Successful' }))
-    .catch(err => {
-      res.send({ response: 'Unsuccessful' })
-    });
+
 }
 
 
