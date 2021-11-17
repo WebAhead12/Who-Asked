@@ -3,15 +3,19 @@ const jwt = require("jsonwebtoken");
 
 const SECRET = "lnvz2342dnv89nSDJkout345";
 
-//async & await is missing.
-function checkCredential(user, password) {//async function checkCredential(user, password
-  const account = users.getUser(user);//awiat users.getUser(user)
-  if (!account)
-    return { response: 'NotFound' };
-  else if (account[0].password != password)
-    return { response: 'WrongPassword' };
-  else
-    return { response: 'Successful' };
+
+function checkCredential(user, password) {
+
+  return users.getUser(user).then(result => {
+    if (!result)
+      return { response: 'NotFound' };
+    else if (res[0].password != password)
+      return { response: 'WrongPassword' };
+    else
+      return { response: 'Successful' };
+  }).catch((err) => {
+    return { response: 'Query error in users table' };
+  });
 }
 
 //cipher the account in the cookie realm
