@@ -31,10 +31,6 @@ app.get("/logout", (req, res) => {
     res.redirect('/');
 });
 
-app.use(express.static('assets'));
-
-app.use(express.static('public'));
-
 app.listen(PORT, () => {
     console.log(`Server is listening on http://localhost:${PORT}`);
 });

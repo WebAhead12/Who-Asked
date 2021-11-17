@@ -7,13 +7,14 @@ const SECRET = "lnvz2342dnv89nSDJkout345";
 function checkCredential(user, password) {
 
   return users.getUser(user).then(result => {
-    if (!result)
+    if (!result.length)
       return { response: 'NotFound' };
-    else if (res[0].password != password)
+    if (result[0].password != password)
       return { response: 'WrongPassword' };
     else
       return { response: 'Successful' };
   }).catch((err) => {
+    console.log(err);
     return { response: 'Query error in users table' };
   });
 }

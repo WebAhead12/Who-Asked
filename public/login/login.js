@@ -76,7 +76,7 @@ function fetchLoginAccount(username, password) {
       return response.json();
     })
     .then((res) => {
-      if (res.response != "Successful") return Promise.reject(errorRouter(res.response));
+      if (res.response != "Successful") return Promise.reject(res.response);
       window.location.href = `/profile/${username}`;
     })
     .catch(errorRouter);
@@ -94,8 +94,8 @@ function fetchRegisterAccount(username, password) {
       return response.json();
     })
     .then((res) => {
-      if (res.response != "Successful") return Promise.reject(errorRouter(res.response));
-      fetchLoginAccount(username, password, password);
+      if (res.response != "Successful") return Promise.reject(res.response);
+      fetchLoginAccount(username, password);
     })
     .catch(errorRouter);
 }
