@@ -1,7 +1,10 @@
 const users = require('./users');
 const jwt = require("jsonwebtoken");
+const dotenv = require('dotenv')
+dotenv.config()
 
-const SECRET = "lnvz2342dnv89nSDJkout345";
+
+const SECRET = process.env.SECRET;
 
 
 function checkCredential(user, password) {
