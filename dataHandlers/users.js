@@ -1,4 +1,4 @@
-const db = require('./connection');
+const db = require('../database/connection');
 
 function getUser(user) {
     return db.query(`SELECT * FROM users`)

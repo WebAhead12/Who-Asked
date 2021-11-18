@@ -1,6 +1,6 @@
 // const db = require('./databse/connection');
 const auth = require('./dataHandlers/auth');
-const users = require('./database/users');
+const users = require('./dataHandlers/users');
 const questionHandler = require('./dataHandlers/questions');
 const question = require('./database/questions');
 const path = require('path');
@@ -68,7 +68,7 @@ function setQuestionOrAnswer(req, res) {
 
   //only logged in users can answer his own questions
   else if (isLogged == user && postInfo.isAnswer) {
-    question.setAnswer(postInfo.questionId, postInfo.answer)
+    questionHandler.setAnswer(postInfo.questionId, postInfo.answer)
       .then(res.send({ response: 'Successful' }))
       .catch(err => {
         res.send({ response: 'Unsuccessful' })
@@ -82,7 +82,7 @@ function setQuestionOrAnswer(req, res) {
 
   else {
     let date = new Date().toLocaleString();
-    question.setQuestion(req.params.user, postInfo.question, date)
+    questionHandler.setQuestion(req.params.user, postInfo.question, date)
       .then(res.send({ response: 'Successful' }))
       .catch(err => {
         res.send({ response: 'Unsuccessful' })
