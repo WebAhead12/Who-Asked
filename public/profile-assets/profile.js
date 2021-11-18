@@ -16,6 +16,7 @@ leftBtn.addEventListener("click", (event) => {
       return response.json();
     })
     .then((res) => {
+      console.log(res);
       if (res.response != "Successful") return Promise.reject(res.response);
       profileImg.src = `/icons/${res.data}.png`
     })
