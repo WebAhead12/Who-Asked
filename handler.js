@@ -124,16 +124,22 @@ function getImageId(req, res) {
   });
 }
 
-//Post /image/:user {id:""} Return={response:"Successful/Unsuccessful"}
+//{direction: "left"/"right"} Return={response:"Successful/Unsuccessful" data: 3(imageID)}
 //adds user icon if they're a registered user
 function setImageId(req, res) {
   const user = req.params.user;
   const direction = req.body.direction;
   if (req.user == user) {//only the account owner can change his icon!
+
     users.setImageId(user, direction)
-      .then(res.send({ response: 'Successful' }))
-      .catch(err => {
-        res.send({ response: 'Unsuccessful' });
+      .then(() => {
+        users.getImageId(user)
+          .then(id => {
+            res.send({ response: 'Successful', data: id })
+          })
+          .catch(err => {
+            res.send({ response: 'Unsuccessful', data: 'default' });
+          })
       })
   }
 }

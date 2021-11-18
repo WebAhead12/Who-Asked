@@ -46,4 +46,4 @@ function setImageId(user, direction) {
     })
 }
 
-module.exports = { getUser, setUser, getUserId, setImageId };
+module.exports = { getUser, setUser, getUserId, setImageId, getImageId };
