@@ -34,7 +34,7 @@ body {
   margin: 0 auto;
   margin-top: 5%;
 
-  display: flex;
+  /* display: flex; */
   flex-flow: column wrap;
 }
 
@@ -48,7 +48,7 @@ body {
 
 .searchContainer input {
   padding: 5px 5px;
-  
+  width: 70%;
   border-radius: 5px;
   border: 1px solid black;
   font-size: medium;
@@ -78,6 +78,7 @@ margin-right: 15px;
 
 .profileName {
   width: 100%;
+  font-size: 250%;
   height: calc(10vw - 10px);
   text-align: center;
 }
@@ -85,7 +86,7 @@ margin-right: 15px;
 .questionsContainer {
   width: 100%;
   height: calc(100% - 50vw - 8% - 30px);
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   margin-left: -6%;
 }
@@ -95,18 +96,19 @@ margin-right: 15px;
   flex-direction: row;
   margin-bottom: 30px;
   align-items: center;
+  padding: 2%;
 }
 
-.questionsContainer input {
+.questionSubmitContainer input {
   padding: 10px 5px;
   border-radius: 5px;
   border: 1px solid black;
   font-size: medium;
-  outline-style: none;
+  outline: #fc6161;
   background-color: var(--box-color);
   color: var(--font-color-inner);
   height: 25px;
-  width: 150px;
+  width:100%;
 
   justify-content: center;
 }
@@ -121,10 +123,12 @@ margin-right: 15px;
 .questions{
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 90%;
   height: auto;
   border: 2px solid;
-  padding:10px;
+  margin-left: 4%;
+  margin-right: 4%;
+  padding: 2%;
 }
 .btnContainer{
   display: flex;
@@ -149,13 +153,24 @@ width: 100%;
 }
 
 .answer-box  {
-width: 70%;
-padding-left: 10%;
-word-wrap: normal;
-flex-wrap: wrap;
-/* tried to allow text box to grow in height as the text grew. too tired, will try tomorrow */
-height: auto;
+  padding: 5px 5px;
+
+  border-radius: 5px;
+  border: 1px solid black;
+  font-size: medium;
+  outline-style: none;
+  background-color: var(--box-color);
+  color: var(--font-color-inner);
 }
+
+
+
+.answer-box  input{
+  width: 60%;
+  padding-left: 10%;
+  word-wrap: normal;
+  flex-wrap: wrap;
+  }
 
 .change {
   display: flex;
@@ -181,11 +196,4 @@ color: #fc6161;
   /* position: absolute; */
   color: #fc6161;
   /* margin-left: 50%; */
-}
-
-/* Media Query */
-
-.profileCard {
-  /* not 75% in media query */
-  width: 75%;
 }
