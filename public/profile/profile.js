@@ -1,10 +1,13 @@
-const leftBtn = document.querySelector("#leftbtn")
-const rightBtn = document.querySelector("#rightbtn")
-const profileImg = document.querySelector(".imageIcon")
+const leftBtn = document.querySelector("#leftbtn");
+const rightBtn = document.querySelector("#rightbtn");
+const profileImg = document.querySelector(".imageIcon");
+const profileName = document.querySelector("profileName");
 const searchBox = document.querySelector("#searchBox");
 
-leftBtn.addEventListener("click", (event) => {
+const homeButton = document.querySelector("#homeButton");
+const logoutButton = document.querySelector("#logoutButton");
 
+leftBtn.addEventListener("click", (event) => {
   let urlArray = window.location.href.replace("#", "").split("/");
   fetch(`/image/${urlArray[urlArray.length - 1]}`, {
     method: "POST",
@@ -17,16 +20,15 @@ leftBtn.addEventListener("click", (event) => {
     })
     .then((res) => {
       if (res.response != "Successful") return Promise.reject(res.response);
-      profileImg.src = `/icons/${res.data}.png`
+      profileImg.src = `/icons/${res.data}.png`;
     })
-    .catch(err => {
-      searchBox.value = "Error, can't retrieve image";
+    .catch((err) => {
+      searchBox.value = "Couldn't change profile image";
       searchBox.style.color = "#fc6161";
     });
-})
+});
 
 rightBtn.addEventListener("click", (event) => {
-
   let urlArray = window.location.href.replace("#", "").split("/");
   fetch(`/image/${urlArray[urlArray.length - 1]}`, {
     method: "POST",
@@ -39,10 +41,21 @@ rightBtn.addEventListener("click", (event) => {
     })
     .then((res) => {
       if (res.response != "Successful") return Promise.reject(res.response);
-      profileImg.src = `/icons/${res.data}.png`
+      profileImg.src = `/icons/${res.data}.png`;
     })
-    .catch(err => {
-
+    .catch((err) => {
+      searchBox.value = "Couldn't change profile image";
+      searchBox.style.color = "#fc6161";
     });
-})
+});
 
+homeButton.addEventListener("click", (event) => {
+  window.location.href = "/";
+});
+
+logoutButton.addEventListener("click", (event) => {
+  window.location.href = "/logout";
+});
+
+let urlArray = window.location.href.replace("#", "").split("/");
+profileName.textContent = urlArray;
