@@ -129,9 +129,9 @@ function getImageId(req, res) {
 //adds user icon if they're a registered user
 function setImageId(req, res) {
   const user = req.params.user;
-  const id = req.body.id;
+  const direction = req.body.direction;
   if (req.user == user) {//only the account owner can change his icon!
-    users.setImageId(user, id)
+    users.setImageId(user, direction)
       .then(res.send({ response: 'Successful' }))
       .catch(err => {
         res.send({ response: 'Unsuccessful' });
