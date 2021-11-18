@@ -1,4 +1,4 @@
-const users = require('../database/users');
+const users = require('./users');
 const jwt = require("jsonwebtoken");
 
 const SECRET = "lnvz2342dnv89nSDJkout345";

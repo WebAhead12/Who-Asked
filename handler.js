@@ -2,7 +2,6 @@
 const auth = require('./dataHandlers/auth');
 const users = require('./dataHandlers/users');
 const questionHandler = require('./dataHandlers/questions');
-const question = require('./database/questions');
 const path = require('path');
 const { response } = require('express');
 
