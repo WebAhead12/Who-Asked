@@ -48,6 +48,7 @@ body {
 
 .searchContainer input {
   padding: 5px 5px;
+  
   border-radius: 5px;
   border: 1px solid black;
   font-size: medium;
@@ -61,20 +62,21 @@ body {
   width: 100%;
   height: 50vw;
   margin-bottom: 15px;
-
+flex-direction: column;
   display: flex;
-  flex-flow: column wrap;
+  /* flex-flow: column wrap; */
   align-items: center;
 }
 
 .profileContainer img {
   width: 40vw;
   height: 40vw;
-
+margin-left: 15px;
+margin-right: 15px;
   margin-bottom: 10px;
 }
 
-.profileContainer div {
+.profileName {
   width: 100%;
   height: calc(10vw - 10px);
   text-align: center;
@@ -117,8 +119,14 @@ body {
   border: 2px solid;
   padding:10px;
 }
+.btnContainer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+padding: 5%;
+}
 
-.logout {
+.button {
   padding: 5px 5px;
   border-radius: 5px;
   border: 1px solid #727379;;
@@ -126,6 +134,7 @@ body {
   width:68px;
 font-size: 110%;
   color: #8f8f99;
+  text-align: center;
 }
 
 hr {
@@ -139,6 +148,46 @@ word-wrap: normal;
 flex-wrap: wrap;
 /* tried to allow text box to grow in height as the text grew. too tired, will try tomorrow */
 height: auto;
+}
+
+.change {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+}
+
+a:visited {
+  color: var(--page-background-color);
+}
+
+a:link {
+  color: var(--page-background-color);
+}
+
+a:active {
+  color: var(--page-background-color);
+}
+
+a:hover {
+  color: var(--page-background-color);
+}
+
+#rightbtn {
+  display: flex;
+font-size: 30px;
+color: #fc6161;
+/* margin-right: 40%; */
+}
+
+#leftbtn {
+  font-size: 30px;
+  display: flex;
+  /* position: absolute; */
+  color: #fc6161;
+  /* margin-left: 50%; */
 }
 
 /* Media Query */

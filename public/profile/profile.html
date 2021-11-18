@@ -7,28 +7,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
   <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/public/profile/profile.css" />
   <script defer src="/profile/profile.js"></script>
 </head>
 
 <body>
-  <div class="logout">Logout</div>
+  <div class="btnContainer">
+    <div class="button">Home</div>
+    <div class="button">Logout</div>
+  </div>
   <container class="profileCard">
-    <!-- for some reason, the site isn't letting me put icons anywhere on the page - despite the fact that it acknowledges them in inspect -->
-    <a href=""> <i class="fas fa-chevron-circle-right"></i></a>
-    <a href=""> <i class="fas fa-chevron-circle-right"></i></a>
 
     <container class="searchContainer">
       <input type="text" id="searchBox" placeholder="Search" />
     </container>
 
+
     <container class="profileContainer">
-      <img class="imageIcon" src="/Assets/icons/default.png" />
+
+      <div class="change">
+        <a href=""> <i id="rightbtn" class="fas fa-chevron-circle-left"></i></a>
+        <img class="imageIcon" src="/Assets/icons/default.png" />
+
+        <a href=""> <i id="leftbtn" class="fas fa-chevron-circle-right"></i></a>
+      </div>
 
       <div class="profileName">Blah Blah</div>
+
     </container>
+
+
     <container class="questionsContainer">
       <container class="questionSubmitContainer">
         <input type="text" id="questionBox" placeholder="Ask a question..." />
