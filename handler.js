@@ -94,7 +94,7 @@ function setQuestionOrAnswer(req, res) {
 //retrieves current user's profile from db
 function getProfile(req, res) {
   if (req.user) {
-    res.sendFile(path.join(__dirname, 'public/profile', 'profile.html'));
+    res.sendFile(path.join(__dirname, '/public/profile-assets', 'profile.html'));
     return;
   }
   res.redirect('/');
