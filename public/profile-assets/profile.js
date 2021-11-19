@@ -75,7 +75,13 @@ fetch(`/image/${username}`)
     if (!response.ok) throw new Error(response.statusText).message;
     return response.json();
   })
-  .then(result => profileImg.src = `/icons/${result.id}.png`)
+  .then(result => {
+    if (!result.id) {
+      profileImg.src = `/icons/0.png`
+    } else {
+      profileImg.src = `/icons/${result.id}.png`
+    }
+  })
   .catch(err => {
     searchBox.value = "Error, can't retrieve image";
     searchBox.style.color = "#fc6161";
@@ -88,8 +94,6 @@ fetch(`/totalquestions/${username}`)
     return response.json();
   })
   .then(result => {
-    console.log(result.total);
-    console.log(Math.ceil(result.total / 10));
     let pageNumber = Math.ceil(result.total / 10)// total question divided by 10 and Math.ceil map the result to least integer greater than or equal to the result.
     pages.innerHTML = distributeNumberOfPages(pageNumber, username).innerHTML;
   })
