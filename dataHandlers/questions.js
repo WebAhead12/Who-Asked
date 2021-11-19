@@ -9,7 +9,7 @@ function getQuestions(user) {
                 const posts = result.rows;
                 return { data: posts.filter(post => post.user_id == id), response: 'Success' };
             }).catch(err => {
-                return { response: 'Query error in posts table' };
+                return { response: 'Query error in posts table, unable to get questions' };
             })
     }).catch(err => {
         return { response: `Couldn't get ${user} user ID` };

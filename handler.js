@@ -28,7 +28,7 @@ function register(req, res) {
         res.send({ response: 'UsernameTaken' })
       }
     })
-    .catch(res.send);
+    .catch(err => res.send({ response: 'Error occured while checking cradentials' }));
 }
 
 
@@ -41,7 +41,9 @@ function login(req, res) {
       res.cookie("account", token, { maxAge: 600000 });
     }
     res.send(response);
-  }).catch(err => res.send({ response: 'Error occured while checking cradentials' }));
+  }).catch(err => {
+    res.send({ response: 'Error occured while checking cradentials' });
+  });
 }
 
 
@@ -51,6 +53,16 @@ function getUserQuestions(req, res) {
   const page = req.params.page;
   questionHandler.viewQuestions(page, user)
     .then((questions) => res.send(questions.data))
+    .catch(err => res.send({ response: 'Unable to get the user`s questions' }));
+}
+
+//get how much the user has been asked
+function getQuestionsQuantity(req, res) {
+  const user = req.params.user;
+  questionHandler.getQuestions(user)
+    .then(result => {
+      res.send({ total: result.data.length })
+    })
     .catch(err => res.send({ response: 'Unable to get the user`s questions' }));
 }
 
@@ -68,7 +80,7 @@ function setQuestionOrAnswer(req, res) {
   //only logged in users can answer his own questions
   else if (isLogged == user && postInfo.isAnswer) {
     questionHandler.setAnswer(postInfo.questionId, postInfo.answer)
-      .then(res.send({ response: 'Successful' }))
+      .then(() => res.send({ response: 'Successful' }))
       .catch(err => {
         res.send({ response: 'Unsuccessful' })
       });
@@ -82,13 +94,12 @@ function setQuestionOrAnswer(req, res) {
   else {
     let date = new Date().toLocaleString();
     questionHandler.setQuestion(req.params.user, postInfo.question, date)
-      .then(res.send({ response: 'Successful' }))
+      .then(() => res.send({ response: 'Successful' }))
       .catch(err => {
         res.send({ response: 'Unsuccessful' })
       });
   }
 }
-
 
 //retrieves current user's profile from db
 function getProfile(req, res) {
@@ -117,8 +128,9 @@ function getUser(req, res) {
 }
 //gets user icon that they chose on registration?
 function getImageId(req, res) {
-  users.getUser(user).then(result => {
-    res.send({ id: result.imageId })
+  const user = req.params.user
+  users.getImageId(user).then(imageid => {
+    res.send({ id: imageid })
   }).catch((err) => {
     return { response: `Query error in users table couldn't get the imageID` };
   });
@@ -144,4 +156,4 @@ function setImageId(req, res) {
   }
 }
 
-module.exports = { home, register, login, getUserQuestions, setQuestionOrAnswer, getProfile, getUser, getImageId, setImageId };
+module.exports = { home, register, login, getUserQuestions, setQuestionOrAnswer, getQuestionsQuantity, getProfile, getUser, getImageId, setImageId };

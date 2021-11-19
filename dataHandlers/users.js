@@ -33,11 +33,11 @@ function setImageId(user, direction) {
     return getImageId(user).then(id => {
         if (direction == 'right') {
             id++;
-            id %= 8;
+            id %= 9;
         } else {
             id--;
             if (id == -1)
-                id = 7;
+                id = 8;
         }
         return db.query(`UPDATE users SET imageId = ${id} WHERE username = '${user}'`)
             .catch(err => {
