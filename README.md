@@ -11,10 +11,10 @@
 
 - Get /data/:user/:page Return={ data: [{id: "", question:"", answer:"", user_id: '', date: ''},...] }
 - Post /data/:user {isAnswer: true/false, question: "", questionId:"", answer: ""} Return={response:"Unsuccessful/Successful"}
-
+- Get /totalquestions/:user return={total: numberofQuestions}
 - Get /profile/:user
 - Get /image/:user Return={id:""}
-- Post /image/:user {id:""} Return={response:"Successful/Unsuccessful"}
+- Post /image/:user {direction: "left"/"right"} Return={response:"Successful/Unsuccessful" data: 3(imageID)}
 - Get /view/:user Return={response:"NotFound/Successful/Same"}
 - Default routes back to /
 
