@@ -91,11 +91,11 @@ margin-right: 15px;
   margin-left: -6%;
 }
 .questionSubmitContainer {
-  width: 100%;
+  width: 98%;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 2%;
+  margin: auto;
 }
 
 .questionSubmitContainer input {
@@ -125,17 +125,30 @@ margin-right: 15px;
   align-items: center;
   margin-bottom: 15px;
   padding: 2%;
+
 }
 
 .pages{
   display: flex;
   flex-direction: row;
   justify-content: center;
-
 }
 
 .page{
-  margin: auto 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.activePage{
+  background-color: #fc6161;
+  border-radius: 5px;
+  color: white;
+}
+
+.page:hover:not(.activePage){
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: .3s;
+
 }
 
 .questions{
@@ -144,8 +157,7 @@ margin-right: 15px;
   width: 90%;
   height: auto;
   border: 2px solid;
-  margin-left: 4%;
-  margin-right: 4%;
+  margin: auto;
   padding: 2%;
 }
 .btnContainer{

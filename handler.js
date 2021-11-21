@@ -52,7 +52,7 @@ function getUserQuestions(req, res) {
   const user = req.params.user;
   const page = req.params.page;
   questionHandler.viewQuestions(page, user)
-    .then((questions) => res.send(questions.data))
+    .then((questions) => res.send(questions))
     .catch(err => res.send({ response: 'Unable to get the user`s questions' }));
 }
 
@@ -71,24 +71,28 @@ function setQuestionOrAnswer(req, res) {
   const postInfo = req.body;
   const user = req.params.user;
   const isLogged = req.user;
-
   //a user cant ask himself.
   if (isLogged == user && !postInfo.isAnswer) {
     return res.send({ response: 'NoAllowed' });
   }
-
-  //only logged in users can answer his own questions
-  else if (isLogged == user && postInfo.isAnswer) {
-    questionHandler.setAnswer(postInfo.questionId, postInfo.answer)
-      .then(() => res.send({ response: 'Successful' }))
-      .catch(err => {
-        res.send({ response: 'Unsuccessful' })
-      });
+  //logged in user can answer another users' questions
+  else if (isLogged != user && postInfo.isAnswer) {
+    return res.send({ response: 'NoAllowed' });
   }
-
   //logged out user can't answer
   else if (!isLogged && postInfo.isAnswer) {
     return res.send({ response: 'NoAllowed' });
+  }
+  //only logged in users can answer his own questions
+  else if (isLogged == user && postInfo.isAnswer) {
+    questionHandler.setAnswer(postInfo.questionId, postInfo.answer)
+      .then(() => {
+        res.send({ response: 'Successful' })
+      })
+      .catch(err => {
+        res.send({ response: 'Unsuccessful' })
+      });
+    return;
   }
 
   else {
@@ -103,18 +107,20 @@ function setQuestionOrAnswer(req, res) {
 
 //retrieves current user's profile from db
 function getProfile(req, res) {
-  if (req.user) {
-    res.sendFile(path.join(__dirname, '/public/profile-assets', 'profile.html'));
-    return;
-  }
-  res.redirect('/');
+  users.getUser(req.params.user)
+    .then(result => {
+      if (result.length)
+        res.sendFile(path.join(__dirname, '/public/profile-assets', 'profile.html'));
+      else
+        res.redirect('/');
+    })
 }
 //retrieves user that was searched for in search bar
 function getUser(req, res) {
   const user = req.params.user;
   if (req.user) {
     users.getUser(user).then(result => {
-      if (!result)
+      if (!result.length)
         res.send({ response: 'NotFound' });
       else if (result.username == user)
         res.send({ response: 'Same' });
@@ -123,8 +129,10 @@ function getUser(req, res) {
     }).catch((err) => {
       return { response: 'Query error in users table' };
     });
+  } else {
+    res.redirect('/');
+
   }
-  res.redirect('/');
 }
 //gets user icon that they chose on registration?
 function getImageId(req, res) {

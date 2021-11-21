@@ -29,7 +29,7 @@ function setQuestion(user, question, date) {
 }
 
 function setAnswer(questionId, answer) {
-    return db.query(`UPDATE posts SET answer = ${answer} WHERE id = ${questionId}`)
+    return db.query(`UPDATE posts SET answer = '${answer}' WHERE id = '${questionId}'`)
         .catch(err => {
             return { response: 'Insertion error, unable to set answer.' };
         });
@@ -38,7 +38,7 @@ function setAnswer(questionId, answer) {
 function viewQuestions(pageNumber, user) {
     return getQuestions(user).then(questions => {
         const start = (pageNumber - 1) * 10;
-        const end = pageNumber * 10 - 1;
+        const end = pageNumber * 10;
         return { data: questions.data.slice(start, end) };
     })
 }
