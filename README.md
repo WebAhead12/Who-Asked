@@ -10,7 +10,7 @@
 - Get /logout Redirect to /
 
 - Get /data/:user/:page Return={ data: [{id: "", question:"", answer:"", user_id: '', date: ''},...] }
-- Post /data/:user {isAnswer: true/false, question: "", questionId:"", answer: ""} Return={response:"Unsuccessful/Successful"}
+- Post profile/data/:user {isAnswer: true/false, question: "", questionId:"", answer: ""} Return={response:"Unsuccessful/Successful"}
 - Get /totalquestions/:user return={total: numberofQuestions}
 - Get /profile/:user
 - Get /image/:user Return={id:""}
