@@ -31,7 +31,7 @@ app.get("/logout", (req, res) => {
 
 app.use(router);
 
-app.use(express.static('Assets'));
+app.use(express.static('assets'));
 
 app.use(express.static('public'));
 
