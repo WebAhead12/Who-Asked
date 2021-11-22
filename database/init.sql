@@ -18,7 +18,7 @@ CREATE TABLE posts (
 );
 
 INSERT INTO users (username, password, imageId)  VALUES
-  ('Julio', '123', '');
+  ('notJulio', '123', '');
 
 INSERT INTO posts (question, answer, user_id) VALUES
   ('(1) What is your name', 'Juan' , 1),

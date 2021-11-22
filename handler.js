@@ -28,7 +28,7 @@ function register(req, res) {
         res.send({ response: 'UsernameTaken' })
       }
     })
-    .catch(err => res.send({ response: 'Error occured while checking cradentials' }));
+    .catch(err => res.send({ response: 'Error occured while checking credentials' }));
 }
 
 
@@ -42,7 +42,8 @@ function login(req, res) {
     }
     res.send(response);
   }).catch(err => {
-    res.send({ response: 'Error occured while checking cradentials' });
+    console.log(err)
+    res.send({ response: 'Error occured while checking credentials' });
   });
 }
 
